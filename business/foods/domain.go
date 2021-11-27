@@ -21,9 +21,11 @@ type Domain struct {
 type FoodUsecaseInterface interface {
 	InsertFood(domain *Domain) (Domain, error)
 	GetAllFoods() ([]Domain, error)
+	DeleteFood(id uint) (string, error)
 }
 
 type FoodRepoInterface interface {
 	InsertFood(domain *Domain) (Domain, error)
 	GetAllFoods() ([]Domain, error)
+	DeleteFood(id uint) (string, error)
 }

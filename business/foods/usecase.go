@@ -31,3 +31,13 @@ func (usecase *FoodUseCases) GetAllFoods() ([]Domain, error) {
 	}
 	return food, nil
 }
+
+func (usecase *FoodUseCases) DeleteFood(id uint) (string, error) {
+	food, err := usecase.repo.DeleteFood(id)
+
+	if err != nil {
+		return "", err
+	}
+
+	return food, nil
+}

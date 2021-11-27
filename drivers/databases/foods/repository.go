@@ -38,3 +38,13 @@ func (repo *FoodRepository) GetAllFoods() ([]foods.Domain, error) {
 	}
 	return toDomainMenu(food), nil
 }
+
+func (repo *FoodRepository) DeleteFood(id uint) (string, error) {
+	rec := Food{}
+	err := repo.db.Delete(&rec, "id = ?", id).Error
+
+	if err != nil {
+		return "", err
+	}
+	return "Product Deleted", nil
+}

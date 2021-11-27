@@ -6,6 +6,7 @@ import (
 	"foodcal/controllers/foods/request"
 	"foodcal/controllers/foods/response"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -38,4 +39,15 @@ func (controller *FoodController) GetAllFood(c echo.Context) error {
 	}
 
 	return controllers.SuccessResponse(c, response.FromDomainListFood(food))
+}
+
+func (controller *FoodController) DeleteFood(c echo.Context) error {
+	param := c.Param("foodId")
+	foodID, _ := strconv.Atoi(param)
+	food, err := controller.usecase.DeleteFood(uint(foodID))
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusBadRequest, "error binding", err)
+	}
+
+	return controllers.SuccessResponse(c, food)
 }
