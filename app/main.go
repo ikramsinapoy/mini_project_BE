@@ -9,6 +9,11 @@ import (
 	foodUsecase "foodcal/business/foods"
 	foodController "foodcal/controllers/foods"
 	foodRepo "foodcal/drivers/databases/foods"
+
+	transactionsUsecase "foodcal/business/transactions"
+	transactionsController "foodcal/controllers/transactions"
+	transactionsRepo "foodcal/drivers/databases/transactions"
+
 	"foodcal/drivers/mysql"
 	"log"
 	"time"
@@ -32,7 +37,7 @@ func init() {
 }
 
 func dbMigrate(db *gorm.DB) {
-	db.AutoMigrate(&userRepo.User{}, &foodRepo.Food{})
+	db.AutoMigrate(&userRepo.User{}, &foodRepo.Food{}, &transactionsRepo.Transaction{})
 }
 
 func main() {
@@ -58,9 +63,14 @@ func main() {
 	foodUsecaseInterface := foodUsecase.NewUseCase(foodRepoInterface, timeoutContext)
 	foodControllerInterface := foodController.NewFoodController(foodUsecaseInterface)
 
+	transactionRepoInterface := transactionsRepo.NewTransactionRepository(db)
+	transactionUsecaseInterface := transactionsUsecase.NewUseCase(transactionRepoInterface, timeoutContext)
+	transactionControllerInterface := transactionsController.NewTransactionController(transactionUsecaseInterface)
+
 	routesInit := routes.RouteControllerList{
-		UserController: *userControllerInterface,
-		FoodController: *foodControllerInterface,
+		UserController:        *userControllerInterface,
+		FoodController:        *foodControllerInterface,
+		TransactionController: *transactionControllerInterface,
 	}
 
 	routesInit.RouteRegister(e)
