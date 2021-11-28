@@ -21,4 +21,5 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 	foods.POST("", controller.FoodController.InsertFood)
 	foods.GET("/menu", controller.FoodController.GetAllFood)
 	foods.DELETE("/:foodId", controller.FoodController.DeleteFood)
+	foods.PUT("/update/:id", controller.FoodController.UpdateFood)
 }

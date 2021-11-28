@@ -41,6 +41,20 @@ func FromDomainInputFood(domain foods.Domain) FoodInputResponse {
 	}
 }
 
+func FromDomainUpdateFood(domain foods.Domain) FoodInputResponse {
+	return FoodInputResponse{
+		Id:          domain.Id,
+		CreatedAt:   domain.CreatedAt,
+		UpdatedAt:   domain.UpdatedAt,
+		DeletedAt:   domain.DeletedAt,
+		Name:        domain.Name,
+		Cost:        domain.Cost,
+		Description: domain.Description,
+		Category:    domain.Category,
+		Restaurant:  domain.Restaurant,
+	}
+}
+
 func FromDomainAllFood(domain foods.Domain) FoodResponse {
 	return FoodResponse{
 		Id:          domain.Id,

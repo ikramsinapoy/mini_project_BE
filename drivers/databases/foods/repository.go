@@ -48,3 +48,20 @@ func (repo *FoodRepository) DeleteFood(id uint) (string, error) {
 	}
 	return "Product Deleted", nil
 }
+
+func (repo *FoodRepository) UpdateFood(id uint, domain *foods.Domain) (foods.Domain, error) {
+	rec := FromDomain(*domain)
+
+	err := repo.db.Where("id = ?", id).First(&rec).Error
+
+	if err != nil {
+		return foods.Domain{}, err
+	}
+
+	food := repo.db.Where("id = ?", id).Updates(&rec)
+	if food.Error != nil {
+		return foods.Domain{}, err
+	}
+
+	return rec.ToDomain(), nil
+}

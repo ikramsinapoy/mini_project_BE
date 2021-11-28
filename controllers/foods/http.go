@@ -51,3 +51,21 @@ func (controller *FoodController) DeleteFood(c echo.Context) error {
 
 	return controllers.SuccessResponse(c, food)
 }
+
+func (controller *FoodController) UpdateFood(c echo.Context) error {
+	req := request.Foods{}
+	err := c.Bind(&req)
+
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusBadRequest, "error binding", err)
+	}
+	param := c.Param("foodId")
+	foodId, _ := strconv.Atoi(param)
+	food, err := controller.usecase.UpdateFood(uint(foodId), req.ToDomainInsertFood())
+
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusBadRequest, "error binding", err)
+	}
+
+	return controllers.SuccessResponse(c, response.FromDomainUpdateFood(food))
+}
