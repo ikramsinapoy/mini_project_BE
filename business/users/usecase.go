@@ -3,18 +3,22 @@ package users
 import (
 	"context"
 	"errors"
+
+	"foodcal/app/middlewares"
 	"time"
 )
 
 type UserUseCases struct {
-	repo UserRepoInterface
-	ctx  time.Duration
+	repo    UserRepoInterface
+	ctx     time.Duration
+	jwtAuth *middlewares.ConfigJWT
 }
 
-func NewUseCase(userRepo UserRepoInterface, contextTimeout time.Duration) UserUsecaseInterface {
+func NewUseCase(userRepo UserRepoInterface, contextTimeout time.Duration, jwtauth *middlewares.ConfigJWT) UserUsecaseInterface {
 	return &UserUseCases{
-		repo: userRepo,
-		ctx:  contextTimeout,
+		repo:    userRepo,
+		ctx:     contextTimeout,
+		jwtAuth: jwtauth,
 	}
 }
 
@@ -38,9 +42,7 @@ func (usecase *UserUseCases) Login(domain Domain, ctx context.Context) (Domain, 
 	if err != nil {
 		return Domain{}, err
 	}
+	user.Token = usecase.jwtAuth.GenererateToken(domain.Id)
+
 	return user, nil
 }
-
-// func (usecase *UserUseCases) GetAllUsers(ctx context.Context) ([]Domain, error) {
-// 	return []Domain{}, nil
-// }

@@ -1,0 +1,12 @@
+mode: set
+foodcal/business/users/usecase.go:20.128,26.2 1 1
+foodcal/business/users/usecase.go:28.71,30.16 2 1
+foodcal/business/users/usecase.go:34.2,34.18 1 1
+foodcal/business/users/usecase.go:30.16,32.3 1 0
+foodcal/business/users/usecase.go:37.88,38.24 1 1
+foodcal/business/users/usecase.go:41.2,41.27 1 1
+foodcal/business/users/usecase.go:44.2,45.16 2 1
+foodcal/business/users/usecase.go:48.2,50.18 2 1
+foodcal/business/users/usecase.go:38.24,40.3 1 0
+foodcal/business/users/usecase.go:41.27,43.3 1 0
+foodcal/business/users/usecase.go:45.16,47.3 1 1

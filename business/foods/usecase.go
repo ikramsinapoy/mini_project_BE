@@ -41,3 +41,13 @@ func (usecase *FoodUseCases) DeleteFood(id uint) (string, error) {
 
 	return food, nil
 }
+
+func (usecase *FoodUseCases) UpdateFood(id uint, domain *Domain) (Domain, error) {
+	food, err := usecase.repo.UpdateFood(id, domain)
+
+	if err != nil {
+		return Domain{}, err
+	}
+
+	return food, nil
+}

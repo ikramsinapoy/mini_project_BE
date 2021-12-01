@@ -24,11 +24,9 @@ type Domain struct {
 type UserUsecaseInterface interface {
 	Register(domain *Domain) (Domain, error)
 	Login(domain Domain, ctx context.Context) (Domain, error)
-	// GetAllUsers(ctx context.Context) ([]Domain, error)
 }
 
 type UserRepoInterface interface {
 	Register(domain *Domain) (Domain, error)
 	Login(domain Domain, ctx context.Context) (Domain, error)
-	// GetAllUsers(ctx context.Context) ([]Domain, error)
 }

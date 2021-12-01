@@ -2,14 +2,16 @@ package routes
 
 import (
 	foodController "foodcal/controllers/foods"
+	transactionController "foodcal/controllers/transactions"
 	userController "foodcal/controllers/users"
 
 	"github.com/labstack/echo/v4"
 )
 
 type RouteControllerList struct {
-	UserController userController.UserController
-	FoodController foodController.FoodController
+	UserController        userController.UserController
+	FoodController        foodController.FoodController
+	TransactionController transactionController.TransactionController
 }
 
 func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
@@ -21,4 +23,9 @@ func (controller RouteControllerList) RouteRegister(c *echo.Echo) {
 	foods.POST("", controller.FoodController.InsertFood)
 	foods.GET("/menu", controller.FoodController.GetAllFood)
 	foods.DELETE("/:foodId", controller.FoodController.DeleteFood)
+	foods.PUT("/update/:foodId", controller.FoodController.UpdateFood)
+
+	transaction := c.Group("/transaction")
+	transaction.POST("", controller.TransactionController.Transactions)
+	transaction.GET("/history", controller.TransactionController.HistoryTrans)
 }

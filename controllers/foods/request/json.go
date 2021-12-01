@@ -8,6 +8,7 @@ type Foods struct {
 	Description string `json:"description"`
 	Category    string `json:"category"`
 	Restaurant  string `json:"restaurant"`
+	Calorie     string `json:"calorie"`
 }
 
 func (food Foods) ToDomainInsertFood() *foods.Domain {
@@ -17,5 +18,6 @@ func (food Foods) ToDomainInsertFood() *foods.Domain {
 		Description: food.Description,
 		Category:    food.Category,
 		Restaurant:  food.Restaurant,
+		Calorie:     food.Calorie,
 	}
 }

@@ -1,7 +1,6 @@
 package foods
 
 import (
-	"fmt"
 	"foodcal/business/foods"
 
 	"gorm.io/gorm"
@@ -31,8 +30,6 @@ func (repo *FoodRepository) GetAllFoods() ([]foods.Domain, error) {
 	var food []Food
 	err := repo.db.Find(&food).Error
 
-	fmt.Println(food)
-
 	if err != nil {
 		return []foods.Domain{}, err
 	}
@@ -47,4 +44,15 @@ func (repo *FoodRepository) DeleteFood(id uint) (string, error) {
 		return "", err
 	}
 	return "Product Deleted", nil
+}
+
+func (repo *FoodRepository) UpdateFood(id uint, domain *foods.Domain) (foods.Domain, error) {
+	foodDb := FromDomain(*domain)
+
+	food := repo.db.Where("id = ?", id).Updates(&foodDb)
+	if food.Error != nil {
+		return foods.Domain{}, food.Error
+	}
+
+	return foodDb.ToDomain(), nil
 }

@@ -25,8 +25,8 @@ func SuccessResponse(c echo.Context, data interface{}) error {
 
 func ErrorResponse(c echo.Context, status int, err string, errs error) error {
 	response := BaseResponse{}
-	response.Meta.Status = http.StatusOK
+	response.Meta.Status = http.StatusBadRequest
 	response.Meta.Message = err
 	response.Meta.Messages = []string{errs.Error()}
-	return c.JSON(http.StatusOK, response)
+	return c.JSON(http.StatusBadRequest, response)
 }
