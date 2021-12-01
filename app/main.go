@@ -1,6 +1,7 @@
 package main
 
 import (
+	"foodcal/app/middlewares"
 	"foodcal/app/routes"
 	userUsecase "foodcal/business/users"
 	userController "foodcal/controllers/users"
@@ -56,7 +57,7 @@ func main() {
 
 	e := echo.New()
 	userRepoInterface := userRepo.NewUserRepository(db)
-	userUseCaseInterface := userUsecase.NewUseCase(userRepoInterface, timeoutContext)
+	userUseCaseInterface := userUsecase.NewUseCase(userRepoInterface, timeoutContext, &middlewares.ConfigJWT{})
 	userControllerInterface := userController.NewUserController(userUseCaseInterface)
 
 	foodRepoInterface := foodRepo.NewFoodRepository(db)

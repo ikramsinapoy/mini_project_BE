@@ -1,6 +1,10 @@
 package transactions
 
-import "time"
+import (
+	// "foodcal/drivers/databases/foods"
+	// "foodcal/business/foods"
+	"time"
+)
 
 type TransUseCases struct {
 	repo TransRepoInterface
@@ -12,8 +16,9 @@ func NewUseCase(transRepo TransRepoInterface, contextTimeout time.Duration) Tran
 	}
 }
 
-func (usecase *TransUseCases) Transactions(idUser int, domain *Domain) (Domain, error) {
-	trans, err := usecase.repo.Transactions(idUser, domain)
+func (usecase *TransUseCases) Transactions(domain *Domain) (Domain, error) {
+	trans, err := usecase.repo.Transactions(domain)
+
 	if err != nil {
 		return Domain{}, err
 	}

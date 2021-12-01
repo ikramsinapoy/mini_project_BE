@@ -49,15 +49,9 @@ func (repo *FoodRepository) DeleteFood(id uint) (string, error) {
 func (repo *FoodRepository) UpdateFood(id uint, domain *foods.Domain) (foods.Domain, error) {
 	foodDb := FromDomain(*domain)
 
-	err := repo.db.Where("id = ?", id).First(&foodDb).Error
-
-	if err != nil {
-		return foods.Domain{}, err
-	}
-
 	food := repo.db.Where("id = ?", id).Updates(&foodDb)
 	if food.Error != nil {
-		return foods.Domain{}, err
+		return foods.Domain{}, food.Error
 	}
 
 	return foodDb.ToDomain(), nil

@@ -2,6 +2,9 @@ package transactions
 
 import (
 	"foodcal/business/transactions"
+
+	"foodcal/drivers/databases/foods"
+	"foodcal/drivers/databases/users"
 	"time"
 )
 
@@ -11,7 +14,9 @@ type Transaction struct {
 	UpdatedAt time.Time
 	IdUser    int
 	IdFood    int
-	Status    bool
+	Food      foods.Food `gorm:"foreignKey:IdFood"`
+	User      users.User `gorm:"foreignKey:IdUser"`
+	Status    string
 }
 
 func (transaction *Transaction) ToDomain() transactions.Domain {

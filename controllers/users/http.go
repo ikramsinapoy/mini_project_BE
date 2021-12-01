@@ -34,10 +34,15 @@ func (controller *UserController) Login(c echo.Context) error {
 	ctx := c.Request().Context()
 	var userLogin request.UserLogin
 	err := c.Bind(&userLogin)
+
 	if err != nil {
 		return controllers.ErrorResponse(c, http.StatusInternalServerError, "error binding", err)
 	}
 	user, err := controller.usecase.Login(*userLogin.ToDomainLogin(), ctx)
+
+	if err != nil {
+		return controllers.ErrorResponse(c, http.StatusInternalServerError, "error binding", err)
+	}
 	return controllers.SuccessResponse(c, response.FromDomainLogin(user))
 }
 

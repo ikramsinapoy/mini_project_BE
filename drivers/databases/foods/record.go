@@ -2,6 +2,7 @@ package foods
 
 import (
 	"foodcal/business/foods"
+	// "foodcal/drivers/databases/users"
 	"time"
 
 	"gorm.io/gorm"
@@ -17,6 +18,9 @@ type Food struct {
 	Description string
 	Category    string
 	Restaurant  string
+	Calorie     string
+	// IdUser      int
+	// User        users.User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
 
 func (food *Food) ToDomain() foods.Domain {
@@ -30,6 +34,7 @@ func (food *Food) ToDomain() foods.Domain {
 		Description: food.Description,
 		Category:    food.Category,
 		Restaurant:  food.Restaurant,
+		Calorie:     food.Calorie,
 	}
 }
 
@@ -44,8 +49,10 @@ func FromDomain(domain foods.Domain) Food {
 		Description: domain.Description,
 		Category:    domain.Category,
 		Restaurant:  domain.Restaurant,
+		Calorie:     domain.Calorie,
 	}
 }
+
 func (food Food) toDomainListFood() foods.Domain {
 	return foods.Domain{
 		Id:          food.Id,
@@ -57,6 +64,7 @@ func (food Food) toDomainListFood() foods.Domain {
 		Description: food.Description,
 		Category:    food.Category,
 		Restaurant:  food.Restaurant,
+		Calorie:     food.Calorie,
 	}
 }
 

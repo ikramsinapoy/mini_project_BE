@@ -3,6 +3,7 @@ package controllers
 import (
 	"foodcal/business/transactions"
 	"foodcal/controllers"
+
 	"foodcal/controllers/transactions/request"
 	"foodcal/controllers/transactions/response"
 	"net/http"
@@ -26,8 +27,8 @@ func (controller *TransactionController) Transactions(c echo.Context) error {
 	if err != nil {
 		return controllers.ErrorResponse(c, http.StatusInternalServerError, "error binding", err)
 	}
-
-	transaction, err := controller.usecase.Transactions(id, trans.ToDomainTransaction())
+	// transactions.Domain.TotalPrice = foods.Domain.Cost
+	transaction, err := controller.usecase.Transactions(trans.ToDomainTransaction())
 	return controllers.SuccessResponse(c, response.FromDomainTransaction(transaction))
 }
 

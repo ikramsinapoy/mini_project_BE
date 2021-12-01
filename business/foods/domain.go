@@ -16,6 +16,7 @@ type Domain struct {
 	Description string
 	Category    string
 	Restaurant  string
+	Calorie     string
 }
 
 type FoodUsecaseInterface interface {

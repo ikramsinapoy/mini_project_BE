@@ -16,12 +16,11 @@ func NewTransactionRepository(gormDb *gorm.DB) transactions.TransRepoInterface {
 	}
 }
 
-func (repo *TransactionRepository) Transactions(userId int, domain *transactions.Domain) (transactions.Domain, error) {
+func (repo *TransactionRepository) Transactions(domain *transactions.Domain) (transactions.Domain, error) {
 	userDb := FromDomain(*domain)
-	userDb.IdUser = userId
-	userDb.Status = false
+	userDb.Status = "Transaksi berhasil"
 
-	err := repo.db.Create(&userDb).Error
+	err := repo.db.Preload("Food").Preload("User").Create(&userDb).Error
 	if err != nil {
 		return transactions.Domain{}, err
 	}

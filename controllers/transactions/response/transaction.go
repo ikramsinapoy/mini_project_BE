@@ -11,7 +11,7 @@ type TransResponse struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 	IdUser    int       `json:"id_user"`
 	IdFood    int       `json:"id_food"`
-	Status    bool      `json:"status"`
+	Status    string    `json:"status"`
 }
 
 func FromDomainTransaction(domain transactions.Domain) TransResponse {

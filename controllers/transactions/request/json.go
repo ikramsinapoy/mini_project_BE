@@ -3,11 +3,15 @@ package request
 import "foodcal/business/transactions"
 
 type Transactions struct {
-	IdFood int `json:"id_food"`
+	Id          uint   `json:"id"`
+	IdFood      int    `json:"id_food"`
+	IdUser      int    `json:"id_user"`
+	ProductName string `json:"product_name"`
 }
 
-func (food Transactions) ToDomainTransaction() *transactions.Domain {
+func (trans Transactions) ToDomainTransaction() *transactions.Domain {
 	return &transactions.Domain{
-		IdFood: food.IdFood,
+		IdFood: trans.IdFood,
+		IdUser: trans.IdUser,
 	}
 }

@@ -1,6 +1,8 @@
 package transactions
 
-import "time"
+import (
+	"time"
+)
 
 type Domain struct {
 	Id        uint
@@ -8,15 +10,15 @@ type Domain struct {
 	UpdatedAt time.Time
 	IdUser    int
 	IdFood    int
-	Status    bool
+	Status    string
 }
 
 type TransUsecaseInterface interface {
-	Transactions(userId int, domain *Domain) (Domain, error)
+	Transactions(domain *Domain) (Domain, error)
 	HistoryTrans() ([]Domain, error)
 }
 
 type TransRepoInterface interface {
-	Transactions(userId int, domain *Domain) (Domain, error)
+	Transactions(domain *Domain) (Domain, error)
 	HistoryTrans() ([]Domain, error)
 }

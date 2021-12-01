@@ -17,6 +17,7 @@ type FoodInputResponse struct {
 	Description string         `json:"description"`
 	Category    string         `json:"category"`
 	Restaurant  string         `json:"restaurant"`
+	Calorie     string         `json:"calorie"`
 }
 type FoodResponse struct {
 	Id          uint   `json:"id"`
@@ -25,6 +26,7 @@ type FoodResponse struct {
 	Description string `json:"description"`
 	Category    string `json:"category"`
 	Restaurant  string `json:"restaurant"`
+	Calorie     string `json:"calorie"`
 }
 
 func FromDomainInputFood(domain foods.Domain) FoodInputResponse {
@@ -38,6 +40,7 @@ func FromDomainInputFood(domain foods.Domain) FoodInputResponse {
 		Description: domain.Description,
 		Category:    domain.Category,
 		Restaurant:  domain.Restaurant,
+		Calorie:     domain.Calorie,
 	}
 }
 
@@ -52,6 +55,7 @@ func FromDomainUpdateFood(domain foods.Domain) FoodInputResponse {
 		Description: domain.Description,
 		Category:    domain.Category,
 		Restaurant:  domain.Restaurant,
+		Calorie:     domain.Calorie,
 	}
 }
 
@@ -63,6 +67,7 @@ func FromDomainAllFood(domain foods.Domain) FoodResponse {
 		Description: domain.Description,
 		Category:    domain.Category,
 		Restaurant:  domain.Restaurant,
+		Calorie:     domain.Calorie,
 	}
 }
 
